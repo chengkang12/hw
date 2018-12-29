@@ -1,0 +1,15 @@
+FROM maven:alpine
+
+WORKDIR /tmp/
+
+COPY pom.xml .
+
+# get all the downloads out of the way. Try to reuse cache as much as possible until here
+RUN mvn verify clean --fail-never
+
+# Start building source
+COPY src ./src
+
+RUN mvn package -Dmaven.test.skip=true && \
+    mkdir -p /usr/app/ && \
+    cp -r /tmp/target/* /usr/app
