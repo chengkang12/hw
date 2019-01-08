@@ -35,6 +35,8 @@ public class DevK8sApiService {
             namespaceList = kubernetesClient.namespaces().list();
             System.out.println("list sucess");
         }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             System.out.println("list failed");
         }
         return namespaceList;
