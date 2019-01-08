@@ -2,6 +2,7 @@ package com.chengkang.services;
 
 import io.fabric8.kubernetes.api.model.NamespaceList;
 import io.fabric8.kubernetes.api.model.NodeList;
+import io.fabric8.kubernetes.api.model.ServiceList;
 import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 import io.fabric8.kubernetes.client.DefaultKubernetesClient;
@@ -52,6 +53,18 @@ public class DevK8sApiService {
             System.out.println("list failed");
         }
         return nodeList;
+    }
+
+    //列出当前可用节点
+    public static ServiceList listService(){
+        ServiceList serviceList = new ServiceList();
+        try {
+            serviceList = kubernetesClient.services().list();
+            System.out.println("list sucess");
+        }catch (Exception e){
+            System.out.println("list failed");
+        }
+        return serviceList;
     }
 }
 
