@@ -62,6 +62,8 @@ public class DevK8sApiService {
             serviceList = kubernetesClient.services().list();
             System.out.println("list sucess");
         }catch (Exception e){
+            e.printStackTrace();
+            System.out.println(e.getMessage());
             System.out.println("list failed");
         }
         return serviceList;
